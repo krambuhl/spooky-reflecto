@@ -1,0 +1,29 @@
+{
+  "name": "reflecto",
+  "version": "0.1.0",
+  "description": "Components reflected every which way",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel lib -d dist",
+    "develop": "babel lib -w -d dist",
+    "test": "tape test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krambuhl/reflecto.git"
+  },
+  "author": "Evan Krambuhl <thekrambuhl@gmail.com> (http://stumptownbear.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krambuhl/reflecto/issues"
+  },
+  "homepage": "https://github.com/krambuhl/reflecto",
+  "devDependencies": {
+    "babel-cli": "~6",
+    "babel-plugin-add-module-exports": "~0.1",
+    "babel-preset-es2015": "~6",
+    "tape": "~4"
+  },
+  "dependencies": {
+  }
+}
