@@ -1,7 +1,7 @@
 {
   "name": "reflecto",
   "version": "0.1.0",
-  "description": "Components reflected every which way",
+  "description": "Reflect component every which way",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel lib -d dist",
