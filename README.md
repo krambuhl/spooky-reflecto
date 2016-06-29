@@ -8,10 +8,10 @@
 import Reflecto from 'reflecto';
 
 // transforms
-import postcssTransform from 'reflecto-transform-postcss';
-import rogainTransform from 'reflecto-transform-rogain';
-import babelTransform from 'reflecto-transform-babel';
-import handlebarsTransform from 'reflecto-transform-handlebars';
+import postcssImporter from 'reflecto-importer-postcss';
+import rogainImporter from 'reflecto-importer-rogain';
+import babelImporter from 'reflecto-importer-babel';
+import handlebarsImporter from 'reflecto-importer-handlebars';
 
 import variables from './variables';
 
@@ -19,10 +19,10 @@ import variables from './variables';
 const api = new Reflecto();
 
 // define component file entry transforms
-api.use(postcssTransform([ autoprefixer() ]));
-api.use(rogainTransform());
-api.use(babelTransform());
-api.use(handlebarsTransform());
+api.use(postcssImporter([ autoprefixer() ]));
+api.use(rogainImporter());
+api.use(babelImporter());
+api.use(handlebarsImporter());
 
 // define shared variables
 api.variables = variables;
@@ -75,6 +75,13 @@ api.css('Card', { variations: 'small' });
 ```
 
 ## Ecosystem
+
+### Component Importers
+
+* reflecto-importer-postcss
+* reflecto-importer-rogain
+* reflecto-importer-babel
+* reflecto-importer-handlebars
 
 ### Postcss importer
 
