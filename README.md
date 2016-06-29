@@ -71,7 +71,7 @@ c('Card', { addClass: 'my-card' }, [
 ### Output CSS
 
 ```js
-api.css('Card', { variations: 'small' });
+api.css('Card', { version: 6 });
 ```
 
 ## Ecosystem
