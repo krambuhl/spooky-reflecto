@@ -1,10 +1,3 @@
-# reflecto
-
-## Example
-
-### Setup Environment
-
-```js
 import Reflecto from 'reflecto';
 
 // transforms
@@ -36,7 +29,7 @@ api.defaultSources({
   babel: '**/*.js'
 });
 
-// define components using default sources
+// Define a couple components using default sources
 api.component('Card', __dirname + '/components/card');
 api.component('List', __dirname + '/components/list');
 
@@ -46,11 +39,10 @@ api.component('Header', __dirname + '/components/header', {
   css: '*.css',
   handlebars: '.hbs'
 });
-```
 
-### Output Composed Components
+// Get component CSS
+api.css('Card', { variations: 'small' });
 
-```js
 // build html using components
 import { Component as c, Tag as t } from 'reflecto';
 
@@ -66,51 +58,3 @@ c('Card', { addClass: 'my-card' }, [
   ]),
   c('Button', { href: 'learn-more' }, [ 'Learn More' ])
 ]);
-```
-
-### Output CSS
-
-```js
-api.css('Card', { variations: 'small' });
-```
-
-## Ecosystem
-
-### Postcss importer
-
-```css
-@import "component?name=header";
-@import "component?name=list";
-@import "component?name=card";
-@import "component?name=link&variations=small,dark";
-@import "component?name=card&version=6";
-```
-
-### Rogain2Reflecto
-
-```xml
-<Card addClass="my-card">
-  <Header tagName="h3">Hello World</Header>
-  <List>
-    <ListItem>
-      <p>Lorem ipsum dolor sit amet.</p>
-    </ListItem>
-    <ListItem>
-      <p>Dolor sit amet lorem ipsum.</p>
-    </ListItem>
-  </List>
-  <Button href="learn-more">Learn More</Button>
-</Card>
-```
-
-<!-- ## Install
-
-With [npm](https://www.npmjs.com) do:
-
-```
-npm install reflecto
-``` -->
-
-## License
-
-MIT

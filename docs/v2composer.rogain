@@ -1,0 +1,12 @@
+<Card addClass="my-card">
+  <Header tagName="h3">Hello World</Header>
+  <List>
+    <ListItem>
+      <p>Lorem ipsum dolor sit amet.</p>
+    </ListItem>
+    <ListItem>
+      <p>Dolor sit amet lorem ipsum.</p>
+    </ListItem>
+  </List>
+  <Button href="learn-more">Learn More</Button>
+</Card>

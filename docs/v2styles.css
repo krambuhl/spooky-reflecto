@@ -1,0 +1,9 @@
+/*
+  would require a reflecto postcss plugin
+*/
+
+@import "component?name=header";
+@import "component?name=list";
+@import "component?name=card";
+@import "component?name=link&variations=small,dark";
+@import "component?name=card&version=6";
