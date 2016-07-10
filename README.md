@@ -6,77 +6,83 @@
 
 ```js
 import Reflecto from 'reflecto';
+import {
+  assetsImporter,
+  htmlImporter,
+  cssImporter,
+  jsImporter
+} from 'reflecto';
 
-// transforms
-import postcssImporter from 'reflecto-importer-postcss';
-import rogainImporter from 'reflecto-importer-rogain';
-import babelImporter from 'reflecto-importer-babel';
-import handlebarsImporter from 'reflecto-importer-handlebars';
-
-import variables from './variables';
+// config with defaults
+const config = options => Object.assign({
+  importers: {
+    assets: [ new AssetsImporter('assets/**/*') ],
+    html: [ new HtmlImporter('*.html') ],
+    css: [ new CssImporter('*.css') ],
+    js: [ new JsImporter('*.js') ]
+  }
+}, options);
 
 // create an api
 const api = new Reflecto();
 
-// define component file entry transforms
-api.use(postcssImporter([ autoprefixer() ]));
-api.use(rogainImporter());
-api.use(babelImporter());
-api.use(handlebarsImporter());
+// Define a couple components using default sources
+api.defineComponent(config({
+  name: 'Card',
+  dir: __dirname + '/component/card'
+}));
 
-// define shared variables
-api.variables = variables;
-
-// define default file sources relative
-// to each componet directory
-api.defaultSources({
-  assetsDir: 'assets',
-  postcss: '*.css',
-  rogain: '*.rogain',
-  babel: '**/*.js'
-});
-
-// define components using default sources
-api.component('Card', __dirname + '/components/card');
-api.component('List', __dirname + '/components/list');
-
-// define a component with custom sources
-api.component('Header', __dirname + '/components/header', {
-  assetsDir: 'assets',
-  css: '*.css',
-  handlebars: '.hbs'
-});
+api.defineComponent(config({
+  name: 'List',
+  dir: __dirname + '/component/list/1.2',
+  version: '1.2',
+  tags: [
+    'core',
+    'typography'
+  ]
+}));
 ```
 
 ### Output Composed Components
 
 ```js
 // build html using components
-import { Component as c, Tag as t } from 'reflecto';
-
-c('Card', { addClass: 'my-card' }, [
-  c('Header', { tagName: 'h3' }, [ 'Hello World' ]),
-  c('List', null, [
-    c('ListItem', null, [
-      t('p', null, [ 'Lorem ipsum dolor sit amet.' ]),
+api.html('Card', { addClass: 'my-card' }, [
+  api.html('Header', { tagName: 'h3' }, [ 'Hello World' ]),
+  api.html('List', null, [
+    api.html('ListItem', null, [
+      api.html('p', null, [ 'Lorem ipsum dolor sit amet.' ])
     ]),
-    c('ListItem', null, [
-      t('p', null, [ 'Dolor sit amet lorem ipsum.' ]),
+    api.html('ListItem', null, [
+      api.html('p', null, [ 'Dolor sit amet lorem ipsum.' ]),
+      api.html('img', {
+        src: api.asset('Card', 'filler-image.jpg')
+      })
     ])
   ]),
-  c('Button', { href: 'learn-more' }, [ 'Learn More' ])
+  api.html('Button', { href: 'learn-more' }, [ 'Learn More' ])
 ]);
 ```
 
 ### Output CSS
 
 ```js
-api.css('Card', { version: 6 });
+api.css('Card', { variations: 'small' });
+```
+
+### Require component Javascript
+
+```js
+// used with brfs browserify transfomr
+import fs from 'fs';
+const { createCard, cardStates } = fs.readFileSync('http://localhost:7789/connectivedx/card/js?version=1.2');
 ```
 
 ## Ecosystem
 
 ### Component Importers
+
+By default reflecto imports assets,
 
 * reflecto-importer-postcss
 * reflecto-importer-rogain
